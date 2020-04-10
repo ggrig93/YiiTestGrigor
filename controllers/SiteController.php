@@ -3,13 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\DataHelper;
-use app\models\City;
-use app\models\Skill;
 use app\models\User;
-use app\models\UserSkills;
-use http\Client;
-use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -70,6 +64,9 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * @return false|string
+     */
     public function actionGetData() {
         $data = [];
         foreach (User::find()->batch(100) as $users) {
@@ -77,7 +74,7 @@ class SiteController extends Controller
                 $data[] = [
                     $user->id, $user->name,
                     $user->city->name,
-                    implode(', ', \yii\helpers\ArrayHelper::map($user->skills, 'id', 'name'))
+                    implode(', ', ArrayHelper::map($user->skills, 'id', 'name'))
                 ];
             }
         }
@@ -85,6 +82,9 @@ class SiteController extends Controller
         return json_encode(compact('data'));
     }
 
+    /**
+    * created new user
+    */
     public function actionCreateUser() {
 
         $user = new User();
@@ -97,6 +97,11 @@ class SiteController extends Controller
         }
     }
 
+    /**
+     * @return \yii\web\Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionDelete() {
         $id = \Yii::$app->request->post('id');
         $model = User::find(['id' => $id])->one();

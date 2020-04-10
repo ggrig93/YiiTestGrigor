@@ -5,6 +5,12 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+/**
+ * @property integer $id
+ * @property string $name
+ * @property integer $city_id
+ * @property  Skill[] $skills
+ */
 class User extends ActiveRecord
 {
     public static function tableName()

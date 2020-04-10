@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
 
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-         'https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css',
+        'https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css',
         'css/site.css',
     ];
     public $js = [
